@@ -1,0 +1,9 @@
+fastapi==0.141.1
+groq==1.7.0
+python-dotenv==1.2.3
+uvicorn==0.52.4
+google-api-python-client==2.200.0
+google-auth-httplib2==0.4.2
+google-auth-oauthlib==1.4.1
+resend==2.19.0
+tzdata==2026.3

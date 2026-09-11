@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AI Assistant - a focused workspace for smarter productivity.">
+  <title>AI Assistant | Workspace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+  <div class="app-shell">
+    <div class="sidebar-backdrop" data-sidebar-close></div>
+    <aside class="app-sidebar" id="app-sidebar" aria-label="Main navigation">
+      <div class="sidebar-inner">
+        <div class="brand-row">
+          <a class="brand" href="#" aria-label="AI Assistant home">
+            <span class="brand-mark"><i class="bi bi-stars"></i></span>
+            <span>AI Assistant</span>
+          </a>
+          <button class="icon-button sidebar-close d-lg-none" type="button" aria-label="Close navigation" data-sidebar-close>
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+
+        <button class="new-chat-button" type="button" id="new-chat-button">
+          <i class="bi bi-plus-lg"></i>
+          <span>New chat</span>
+          <span class="shortcut-hint">⌘ K</span>
+        </button>
+
+        <div class="history-section">
+          <div class="section-label">
+            <span>Recent conversations</span>
+            <button class="icon-button tiny" type="button" aria-label="Search conversations" title="Search conversations">
+              <i class="bi bi-search"></i>
+            </button>
+          </div>
+          <nav class="conversation-list" id="conversation-list" aria-label="Conversation history">
+            <button class="conversation-item active" type="button" data-conversation="workspace">
+              <i class="bi bi-chat-left-text"></i>
+              <span class="conversation-copy"><strong>Welcome to your workspace</strong><small>Today</small></span>
+            </button>
+            <button class="conversation-item" type="button" data-conversation="launch-plan">
+              <i class="bi bi-chat-left-text"></i>
+              <span class="conversation-copy"><strong>Product launch plan</strong><small>Yesterday</small></span>
+            </button>
+            <button class="conversation-item" type="button" data-conversation="meeting-notes">
+              <i class="bi bi-chat-left-text"></i>
+              <span class="conversation-copy"><strong>Meeting notes summary</strong><small>Aug 28</small></span>
+            </button>
+            <button class="conversation-item" type="button" data-conversation="research">
+              <i class="bi bi-chat-left-text"></i>
+              <span class="conversation-copy"><strong>Research brief</strong><small>Aug 25</small></span>
+            </button>
+          </nav>
+          <button class="history-link" type="button"><i class="bi bi-clock-history"></i> View all history</button>
+        </div>
+
+        <div class="sidebar-bottom">
+          <button class="settings-button" type="button" id="settings-button">
+            <i class="bi bi-gear"></i><span>Settings</span>
+          </button>
+          <div class="profile-card">
+            <div class="avatar user-avatar">AM</div>
+            <div class="profile-copy"><strong>Ahmed Mohamed</strong><small>Personal workspace</small></div>
+            <button class="icon-button tiny" type="button" aria-label="Open profile menu"><i class="bi bi-three-dots"></i></button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-panel">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="icon-button menu-toggle d-lg-none" type="button" aria-label="Open navigation" aria-controls="app-sidebar" aria-expanded="false" data-sidebar-toggle>
+            <i class="bi bi-list"></i>
+          </button>
+          <div>
+            <div class="page-kicker">Personal workspace</div>
+            <h1>AI Assistant</h1>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div class="online-status"><span class="status-dot"></span><span>Online</span></div>
+          <button class="icon-button" type="button" aria-label="Notifications"><i class="bi bi-bell"></i></button>
+          <div class="topbar-avatar user-avatar" aria-label="Ahmed Mohamed">AM</div>
+        </div>
+      </header>
+
+      <section class="chat-workspace" aria-label="AI Assistant conversation">
+        <div class="conversation-header">
+          <div class="assistant-identity">
+            <div class="assistant-avatar"><i class="bi bi-stars"></i></div>
+            <div><h2>AI Assistant</h2><p>Your intelligent productivity assistant</p></div>
+          </div>
+          <button class="icon-button" type="button" aria-label="Conversation options" title="Conversation options"><i class="bi bi-three-dots-vertical"></i></button>
+        </div>
+
+        <div class="messages-scroll" id="messages-scroll">
+          <div class="empty-state" id="empty-state">
+            <div class="empty-state-icon"><i class="bi bi-stars"></i></div>
+            <p class="eyebrow">Ready when you are</p>
+            <h2>How can I help you today?</h2>
+            <p class="empty-state-copy">Ask a question, organize your thoughts, or turn a rough idea into a clear next step.</p>
+            <div class="suggestion-grid" aria-label="Suggested prompts">
+              <button class="suggestion-card" type="button" data-suggestion="Explain something simply">
+                <span class="suggestion-icon peach"><i class="bi bi-lightbulb"></i></span><span><strong>Explain something</strong><small>Break down a complex topic</small></span><i class="bi bi-arrow-up-right"></i>
+              </button>
+              <button class="suggestion-card" type="button" data-suggestion="Help me plan a task">
+                <span class="suggestion-icon lilac"><i class="bi bi-list-check"></i></span><span><strong>Plan a task</strong><small>Turn an idea into a clear plan</small></span><i class="bi bi-arrow-up-right"></i>
+              </button>
+              <button class="suggestion-card" type="button" data-suggestion="Summarize information">
+                <span class="suggestion-icon mint"><i class="bi bi-text-paragraph"></i></span><span><strong>Summarize information</strong><small>Find the signal in the noise</small></span><i class="bi bi-arrow-up-right"></i>
+              </button>
+              <button class="suggestion-card" type="button" data-suggestion="Ask about my documents">
+                <span class="suggestion-icon blue"><i class="bi bi-file-earmark-text"></i></span><span><strong>Ask about documents</strong><small>Get answers from your files</small></span><i class="bi bi-arrow-up-right"></i>
+              </button>
+            </div>
+          </div>
+          <div class="messages-list d-none" id="messages-list" aria-live="polite"></div>
+        </div>
+
+        <div class="composer-wrap">
+          <div class="composer" id="composer">
+            <textarea id="message-input" rows="1" maxlength="4000" placeholder="Message AI Assistant..." aria-label="Message AI Assistant"></textarea>
+            <div class="composer-footer">
+              <div class="composer-tools">
+                <button class="composer-tool" type="button" id="attachment-button" aria-label="Attach a file"><i class="bi bi-paperclip"></i><span>Attach</span></button>
+                <button class="composer-tool" type="button" id="microphone-button" aria-label="Use microphone"><i class="bi bi-mic"></i></button>
+                <span class="composer-note">AI can make mistakes. Check important info.</span>
+              </div>
+              <div class="composer-actions">
+                <span class="character-count" id="character-count">0 / 4000</span>
+                <button class="send-button" id="send-button" type="button" aria-label="Send message" disabled><i class="bi bi-arrow-up"></i><span class="sending-label">Send</span></button>
+              </div>
+            </div>
+          </div>
+          <div class="composer-hint"><span><kbd>Enter</kbd> to send</span><span><kbd>Shift</kbd> + <kbd>Enter</kbd> for new line</span></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toast-container" aria-live="polite"></div>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/chat.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
