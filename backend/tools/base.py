@@ -48,6 +48,9 @@ class ToolRegistry:
         except KeyError as exc:
             raise ToolError(f"Unknown tool: {name}") from exc
 
+    def names(self) -> list[str]:
+        return list(self._tools)
+
     def definitions(self) -> list[dict[str, Any]]:
         return [tool.as_groq_tool() for tool in self._tools.values()]
 

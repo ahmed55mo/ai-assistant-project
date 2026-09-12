@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import logging
 from datetime import datetime, timedelta, timezone
 from typing import Any
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
@@ -11,6 +12,8 @@ from googleapiclient.discovery import build
 
 from backend.auth.google_oauth import GoogleOAuth
 from backend.tools.base import ToolError
+
+logger = logging.getLogger(__name__)
 
 
 class CalendarEventInput(BaseModel):
@@ -119,6 +122,10 @@ class GoogleCalendarProvider(CalendarProvider):
 
     def list_events(self, arguments: dict[str, Any]) -> dict[str, Any]:
         try:
+            logger.debug(
+                "Calendar provider list_events argument_keys=%s",
+                sorted(arguments),
+            )
             now = datetime.now(timezone.utc).isoformat()
             result = self.service.events().list(
                 calendarId=arguments.get("calendar_id", "primary"),
@@ -129,10 +136,18 @@ class GoogleCalendarProvider(CalendarProvider):
             ).execute()
             return {"provider": "google", "events": result.get("items", [])}
         except Exception as exc:
+            logger.error(
+                "Calendar provider list_events failed exception_type=%s",
+                type(exc).__name__,
+            )
             raise ToolError("Google Calendar could not list events.") from exc
 
     def get_event(self, arguments: dict[str, Any]) -> dict[str, Any]:
         try:
+            logger.debug(
+                "Calendar provider get_event argument_keys=%s",
+                sorted(arguments),
+            )
             event = self.service.events().get(
                 calendarId=arguments.get("calendar_id", "primary"), eventId=arguments["event_id"]
             ).execute()
@@ -140,6 +155,10 @@ class GoogleCalendarProvider(CalendarProvider):
         except (KeyError, TypeError, ValueError) as exc:
             raise ToolError("Calendar event_id is required.") from exc
         except Exception as exc:
+            logger.error(
+                "Calendar provider get_event failed exception_type=%s",
+                type(exc).__name__,
+            )
             raise ToolError("Google Calendar could not retrieve the event.") from exc
 
     def create_event(self, arguments: dict[str, Any]) -> dict[str, Any]:

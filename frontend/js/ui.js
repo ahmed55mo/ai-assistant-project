@@ -12,7 +12,9 @@ const UI = {
       empty: document.getElementById("empty-state"),
       messages: document.getElementById("messages-list"),
       scroll: document.getElementById("messages-scroll"),
-      toast: document.getElementById("toast-container")
+      toast: document.getElementById("toast-container"),
+      documents: document.getElementById("documents-panel"),
+      refreshDocuments: document.getElementById("refresh-documents-button")
     };
   },
   setSidebar(open) {

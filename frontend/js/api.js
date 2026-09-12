@@ -1,13 +1,48 @@
 const API_BASE_URL = "http://127.0.0.1:8000";
 
 const api = {
-  async sendMessage(message, conversationId = null) {
+  async sendMessage(message, conversationId = null, userId = "anonymous") {
     return this.request("/api/chat", {
       method: "POST",
       body: JSON.stringify({
         ...(conversationId ? { conversation_id: conversationId } : {}),
+        user_id: userId,
         message
       })
+    });
+  },
+  async uploadDocument(file, conversationId, userId = "anonymous") {
+    const form = new FormData();
+    form.append("file", file);
+    form.append("conversation_id", conversationId);
+    form.append("user_id", userId);
+    return this.request("/api/documents/upload", {
+      method: "POST",
+      body: form,
+      omitJsonContentType: true
+    });
+  },
+  async listDocuments(conversationId, userId = "anonymous") {
+    const params = new URLSearchParams({
+      conversation_id: conversationId,
+      user_id: userId
+    });
+    return this.request(`/api/documents?${params.toString()}`);
+  },
+  async getDocument(documentId, conversationId, userId = "anonymous") {
+    const params = new URLSearchParams({
+      conversation_id: conversationId,
+      user_id: userId
+    });
+    return this.request(`/api/documents/${encodeURIComponent(documentId)}?${params.toString()}`);
+  },
+  async deleteDocument(documentId, conversationId, userId = "anonymous") {
+    const params = new URLSearchParams({
+      conversation_id: conversationId,
+      user_id: userId
+    });
+    return this.request(`/api/documents/${encodeURIComponent(documentId)}?${params.toString()}`, {
+      method: "DELETE"
     });
   },
   async createConversation() {
@@ -27,7 +62,10 @@ const api = {
   async request(path, options = {}) {
     const response = await fetch(`${API_BASE_URL}${path}`, {
       ...options,
-      headers: { "Content-Type": "application/json", ...(options.headers || {}) }
+      headers: {
+        ...(options.omitJsonContentType ? {} : { "Content-Type": "application/json" }),
+        ...(options.headers || {})
+      }
     });
     const data = await response.json().catch(() => ({}));
     if (!response.ok) {

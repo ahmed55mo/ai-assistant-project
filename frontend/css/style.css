@@ -43,6 +43,24 @@ button:focus-visible, textarea:focus-visible, a:focus-visible { outline: 3px sol
 .conversation-copy small { color: var(--subtle); font-size: 10px; }
 .history-link { display: flex; gap: 8px; align-items: center; margin: 14px 10px; color: var(--muted); background: transparent; font-size: 12px; }
 .history-link:hover { color: var(--orange-dark); }
+.documents-section { margin-top: 12px; min-height: 0; }
+.documents-panel { display: grid; gap: 5px; max-height: 205px; overflow-y: auto; padding: 0 4px; scrollbar-width: thin; scrollbar-color: #d6d0c9 transparent; }
+.documents-loading, .documents-empty, .documents-error { display: flex; align-items: flex-start; gap: 8px; margin: 0; padding: 9px 7px; color: var(--subtle); font-size: 10px; line-height: 1.45; }
+.documents-loading i { animation: spin 1.1s linear infinite; }
+.documents-empty i, .documents-error i { margin-top: 2px; color: var(--orange); font-size: 14px; }
+.documents-empty span, .documents-error span { display: grid; gap: 3px; }
+.documents-empty small { color: var(--muted); font-size: 10px; }
+.documents-error { color: #9a6848; }
+.documents-retry { padding: 0; color: var(--orange-dark); background: transparent; font-size: 10px; text-align: left; text-decoration: underline; }
+.document-item { display: flex; align-items: center; gap: 8px; min-width: 0; padding: 8px 6px; border: 1px solid transparent; border-radius: 9px; }
+.document-item:hover { background: var(--panel); border-color: var(--border); }
+.document-icon { display: grid; place-items: center; flex: 0 0 auto; width: 28px; height: 28px; color: var(--orange-dark); background: var(--orange-soft); border-radius: 8px; }
+.document-copy { display: grid; min-width: 0; flex: 1; gap: 2px; }
+.document-copy strong { overflow: hidden; font-size: 10px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+.document-copy small { overflow: hidden; color: var(--subtle); font-size: 9px; text-overflow: ellipsis; white-space: nowrap; text-transform: capitalize; }
+.document-delete { display: grid; place-items: center; flex: 0 0 auto; width: 27px; height: 27px; color: var(--subtle); background: transparent; border-radius: 7px; }
+.document-delete:hover:not(:disabled) { color: #b14e3d; background: #fff0ed; }
+.document-delete:disabled { cursor: wait; opacity: .45; }
 .sidebar-bottom { margin-top: auto; }
 .settings-button { display: flex; align-items: center; gap: 11px; width: 100%; padding: 11px 10px; color: var(--muted); background: transparent; border-radius: 9px; text-align: left; }
 .settings-button:hover { color: var(--ink); background: var(--panel); }
@@ -124,3 +142,4 @@ kbd { padding: 2px 4px; color: #85817b; background: #f1efec; border: 1px solid #
   .composer-hint { gap: 9px; font-size: 9px; }
   .sending-label { display: none; } .send-button { min-width: 36px; padding: 8px; }
 }
+@keyframes spin { to { transform: rotate(360deg); } }
